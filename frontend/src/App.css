@@ -1,0 +1,516 @@
+@import url('./assets/css/fonts.css');
+:root{
+  ---main-color:#4F709C;
+  --secondary-color: #213555;
+  --heading-color: #213555;
+  --background-color: #F5EFE7;
+  --gradient-color: #213555, #4F709C ;
+}
+@keyframes fadeIn{
+  from{
+    opacity: 0;
+  
+  }
+
+  to{
+    opacity: 1;
+  }
+}
+
+@keyframes loading {
+  from{
+    transform: rotate(0deg);
+  }
+  /* 25%{
+    transform: rotate(-45deg);
+  } */
+
+  to{
+    transform: rotate(-360deg);
+  }
+  
+}
+
+
+
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent; /* make scrollbar transparent */
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: solid 1px;
+}
+
+
+
+body{
+  background-color: var(--background-color);
+  margin: 0;
+  padding: 0;
+  font-family: 'Kosugi Maru', sans-serif;
+  height: 100dvh;
+}
+
+#root{
+  height: 100%;
+}
+
+a,
+a::after,
+a:visited,
+a:target{
+  text-decoration: none;
+  color: black;
+}
+
+h3,
+h4{
+  margin: none;
+  height: fit-content;
+}
+
+section{
+  height:100dvh;
+}
+
+main{
+  height: 100%;
+}
+
+.flex{
+  display: flex;
+}
+
+.flex-column{
+  display: flex;
+  flex-direction: column;
+}
+
+
+.wrapper-box-shadow{
+  box-shadow: #000 2.5px 2.5px 5px 5px;
+}
+
+.navbar{
+  background:var(---main-color);
+  position: static;
+  width: 100%;
+  display: flex;
+  height:4rem;
+  align-items: center;
+}
+
+.nav-item{
+  display: block;
+  margin: auto;
+  text-align: center;
+  font-size: 3rem;
+  font-weight: 600;
+  color: #000;
+}
+
+
+.task-section{
+margin: auto;
+background: var(--background-color);
+height:50rem;
+border-radius: 25px;
+height: 100%;
+}
+
+
+
+.todo-list-section{
+  justify-content: space-evenly;
+  margin-bottom: auto;
+  height: 80%;
+  
+}
+
+ul{
+  list-style: none;
+  margin: 0;
+}
+
+
+.todo-box{
+  background: linear-gradient(45deg, var(--gradient-color));
+  border-radius: 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 27%;
+  min-width: 27%;
+  box-shadow:rgba(0, 0, 0, 0.2) 0px 4px 8px 0px;
+  padding: 15px;
+  max-height: 25em;
+}
+
+.todo-content{
+  height: 100%;
+}
+
+.task-feed{
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow-y: scroll;
+  gap: 1rem;
+  margin-top:1rem;
+  animation: fadeIn 1s;
+  animation-fill-mode: forwards;
+}
+
+
+.task-item{
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  justify-content: space-between;
+}
+
+.task-container{
+  display:block;
+  padding:2.5px 25px;
+  width: 50%;
+  background-color: var(--background-color); 
+  border-radius: 15px;
+}
+
+
+.task-title{
+  font-size: 1.2em;
+  font-weight: 600;
+  margin: 0;
+  height: fit-content;
+}
+
+.task-container:hover{
+  background: #B8E7E1;
+}
+
+.center-text{
+  text-align: center;
+}
+
+
+
+textarea {
+  border: dotted;
+  overflow: auto;
+  outline: none;
+  background-color: transparent;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  resize: none; /*remove the resize handle on the bottom right*/
+  height: 100%;
+}
+
+
+.task-input{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  
+}
+
+.task-input textarea,
+.task-input input{
+  background-color: transparent;
+  border: none;
+}
+
+
+
+.task-form-group{
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  font-size: 1.2em;
+}
+
+.task-form-group:last-child{
+  height: 100%;
+}
+
+
+.button-style{
+  border-radius: 10px;
+  font-size: 1em;
+  height: 5rem;
+}
+
+.add-format{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 1rem;
+}
+
+
+.checkmark-img{
+  fill:var(--background-color);
+  cursor: pointer;
+  min-width: 4dvw;
+}
+
+.checkmark-img:hover{
+  fill: #0BDA51;
+}
+.delete-img:hover{
+  fill: red;
+}
+.hidden{
+  display: none;
+}
+
+.reveal{
+  display: block;
+
+}
+
+.task-popup{
+  opacity: 0;
+  position: absolute;
+  margin-left:auto;
+  margin-right:auto;
+  background: var(--background-color);
+  padding: 15px;
+  animation: fadeIn .5s;
+  animation-fill-mode: forwards;
+  left: 20%;
+  top: 25%;
+  max-width: 50%;
+  width: 50%;
+  box-shadow: 1px 1px 1.5px 3px #000;
+  border-radius: 25px;
+  z-index:1;
+
+}
+
+
+.container{
+  margin: auto;
+}
+
+.container-liquid{
+ position: relative;
+ width: 75%;
+ margin: auto;
+ margin-top: 2.5rem;
+}
+
+.loading-box{
+  margin: auto;
+  margin-top: 10%;
+  background: linear-gradient(270deg, var(--gradient-color));
+  padding: 3rem;
+  border-radius: 25px;
+}
+
+.loading-icon{
+  animation: loading 1s;
+  animation-iteration-count: infinite;
+}
+
+
+
+.calender-container{
+  margin: auto;
+  border-radius: 25px;
+  overflow: hidden;
+}
+
+.calender-header{
+  display: flex;
+  gap:1rem;
+  justify-content: space-between;
+  background-color: var(---main-color);
+}
+
+.calendar{
+  margin: auto;
+  background-color:#FAF9F6;
+  animation: fadeIn 1s;
+  animation-fill-mode: forwards;
+}
+
+.days-of-week{
+  display: flex;
+  background-color: var(--secondary-color);
+  justify-content: space-around;
+  height: 3em;
+  color: var(--background-color);
+}
+
+.day-container{
+  width: 13.6%;
+}
+
+.day-label{
+  position: relative;
+  margin-top: auto;
+  top: 25%;
+  
+}
+
+.day-card{
+  width:13.6%;
+  display: inline-block;
+  background: var(---main-color); 
+  margin: .34%;
+  max-height:5%;
+  
+}
+
+
+
+.today{
+  background:var(--background-color); 
+}
+
+.day-card-blank{
+  width:13.6%;
+  border-radius: 15px;
+  display: inline-block;
+  background: transparent; 
+  margin: .34%;
+}
+
+.task-calendar-box h3,
+.task-calendar-box p,
+.date{
+  height: fit-content;
+  margin: 0;
+}
+
+.day-card-content{
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+
+
+.arrow-button{
+  background-color: var(---main-color);
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.5);
+  border: none;
+ 
+}
+
+.arrow-button:active{
+  transform: translateY(2px);
+}
+
+.arrow-button svg{
+  margin: auto;
+}
+
+.back-arrow{
+  rotate: 180deg;
+}
+
+.flex{
+  display: flex;
+}
+
+.flex-column{
+  display: flex;
+  flex-direction: column;
+}
+
+.header-title,
+.header-title input{
+  background:transparent;
+  border: none;
+  align-items: center;
+}
+
+.header-title input{
+  width: 35px;
+  font-size: 30px;
+  
+}
+
+.todo-box-header{
+  width: 80%;
+}
+
+.todo-title{
+  font-size: 1.25em;
+}
+
+.todo-box-button{
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.5);
+  width: 100%;
+  font-size: 1em;
+  
+}
+
+
+
+.todo-box-button-active{
+  border: solid;
+}
+
+.no-margin{
+  margin: 0;
+  height: fit-content;
+}
+
+
+.pressable{
+  cursor: pointer;
+}
+.pressable:active{
+transform: translateY(2px);
+}
+@media (max-width:1024px)  {
+  .clock{
+    display: none;
+  }
+
+  .todo-list-section{
+    flex-direction: column;
+    position: relative;
+  }
+  .task-section{
+    background-color: transparent;
+    height: 100%;
+    margin-top: 2em;
+  }
+  .task-feed{
+    width: 100%;
+  }
+  .task-item{
+    justify-content: space-evenly;
+  }
+  .todo-box{
+    max-width: none;
+    margin-top: 1rem;
+    max-height: 20em;
+  }
+
+  .title-box{
+    background-color: var(---main-color);
+    position: relative;
+  }
+  .container-liquid{
+    width: 95dvw;
+  }
+  .calender-container{
+    font-size: 2.5em;
+  }
+
+  .task-section{
+    box-shadow: none;
+  }
+}
