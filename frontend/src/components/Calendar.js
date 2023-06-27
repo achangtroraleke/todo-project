@@ -103,12 +103,6 @@ let Calendar = (props) => {
                 let tasksForDay= (tasksForTheMonth.filter(e => new Date(e.due_date).toLocaleDateString() === day.toLocaleDateString()));
                
 
-                // let daysAfterSunday = daysInMonth[0].getDay();
-                // for(let i = 0; i<daysAfterSunday; i++){
-                //     return(
-                //         <Calendar blank={true}/>
-                //     )
-                // }
                 if(day.toLocaleDateString() === new Date().toLocaleDateString()){
                     return(
                     <CalendarCard  key={index} activeMonth={selectedDate.getMonth()} month={day.getMonth()} day={day.getDate()} year={day.getFullYear()} dayName={weekday[day.getDay()]} tasksInDay={tasksForDay} today={true} clickFunction={handleClick} activeDate={props.activeDate}/>

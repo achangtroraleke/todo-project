@@ -1,10 +1,10 @@
 @import url('./assets/css/fonts.css');
 :root{
-  ---main-color:#4F709C;
-  --secondary-color: #213555;
+  ---main-color:#32E0C4;
+  --secondary-color: #393E46;
   --heading-color: #213555;
-  --background-color: #F5EFE7;
-  --gradient-color: #213555, #4F709C ;
+  --background-color: #EEEEEE;
+  --gradient-color: #32E0C4, #EEEEEE ;
 }
 @keyframes fadeIn{
   from{
@@ -46,13 +46,13 @@ button:focus {
 }
 
 
-
 body{
-  background-color: var(--background-color);
+  background: linear-gradient(45deg, var(--gradient-color));
   margin: 0;
   padding: 0;
   font-family: 'Kosugi Maru', sans-serif;
-  height: 100dvh;
+  min-height: 100vh;
+  background-repeat: no-repeat;
 }
 
 #root{
@@ -138,7 +138,7 @@ ul{
 
 
 .todo-box{
-  background: linear-gradient(45deg, var(--gradient-color));
+  background: var(---main-color);
   border-radius: 25px;
   display: flex;
   flex-direction: column;
@@ -474,6 +474,10 @@ textarea {
 transform: translateY(2px);
 }
 @media (max-width:1024px)  {
+  body{
+    background: white;
+  }
+
   .clock{
     display: none;
   }
@@ -507,7 +511,7 @@ transform: translateY(2px);
     width: 95dvw;
   }
   .calender-container{
-    font-size: 2.5em;
+    font-size: 2.5dvw;
   }
 
   .task-section{
