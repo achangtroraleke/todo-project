@@ -30,8 +30,6 @@ let Calendar = (props) => {
             for(let i=0; i<startDate.getDay(); i++){
                 let dayBefore = new Date(selectedDate.getFullYear(), selectedDate.getMonth(),1);
                 dayBefore.setDate(dayBefore.getDate()-(i+1));
-    
-                // console.log('before'+dayBefore);
                 dateList.unshift(new Date(dayBefore));
                
             }
@@ -69,7 +67,7 @@ let Calendar = (props) => {
     <div className="container-liquid">
         <div className="calender-container wrapper-box-shadow ">
 
-            <div className="calender-header">
+            <div className="calender-header flex">
 
             <div className="arrow-button pressable" onClick={()=>{
                 clickFunction('subtract');
@@ -90,7 +88,7 @@ let Calendar = (props) => {
             </div>
 
             <div className="calendar">
-                <div className="days-of-week">
+                <div className="days-of-week flex">
                 {weekday.map((dayName, index)=>{
                 return(
                     <div key ={index} className="day-container">
@@ -105,7 +103,7 @@ let Calendar = (props) => {
 
                 if(day.toLocaleDateString() === new Date().toLocaleDateString()){
                     return(
-                    <CalendarCard  key={index} activeMonth={selectedDate.getMonth()} month={day.getMonth()} day={day.getDate()} year={day.getFullYear()} dayName={weekday[day.getDay()]} tasksInDay={tasksForDay} today={true} clickFunction={handleClick} activeDate={props.activeDate}/>
+                    <CalendarCard  key={index} activeMonth={selectedDate.getMonth()} month={day.getMonth()} day={day.getDate()} year={day.getFullYear()} dayName={weekday[day.getDay()]} tasksInDay={tasksForDay} today={true} clickFunction={handleClick} activeDate={props.activeDate} />
                     )
                 }
                 return(

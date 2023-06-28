@@ -8,9 +8,8 @@ const TaskSection = () =>{
     const [selectedDate, setDate] = useState(new Date());
     const [fetchedData, setFetchedData] = useState([])
     const [activeDate, setActiveDate] = useState(selectedDate)
-
+   
     useEffect(()=>{
-       
         getTasksByMonth();
         setLoading(false);
         
@@ -55,7 +54,6 @@ const TaskSection = () =>{
         
     }
 
-
     
     
     if(isLoading){
@@ -67,7 +65,7 @@ const TaskSection = () =>{
     return(
             <main className="container flex-column">
                 <Calendar isLoading = {isLoading} loadingFunction={toggleLoading} apiData={fetchedData.filter(x=> new Date(x.due_date).getMonth()===selectedDate.getMonth())} monthFunction={changeMonth} selectedDate = {selectedDate} activeDate={activeDate} changeDateFunction={changeSelectedDay}/>
-                <TaskList isLoading={isLoading} loadingFunction={toggleLoading} apiData={fetchedData.filter(x=> new Date(x.due_date).getMonth()===selectedDate.getMonth())} selectedDate = {selectedDate} activeDate={activeDate}/>
+                <TaskList isLoading={isLoading} loadingFunction={toggleLoading} apiData={fetchedData.filter(x=> new Date(x.due_date).getMonth()===selectedDate.getMonth())} selectedDate = {selectedDate} activeDate={activeDate} />
             </main>
     );
 }

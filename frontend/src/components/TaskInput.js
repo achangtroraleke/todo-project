@@ -45,7 +45,6 @@ const TaskInput = (props)=> {
     } 
 
     const handleSubmit = () => {
-        console.log(newTask);
         props.onSubmit(newTask);
         
         setNewTask({
@@ -59,7 +58,6 @@ const TaskInput = (props)=> {
     }
 
     const editCalled=()=>{
-            console.log('edit called');
             setNewTask(props.editTask);
     }
 

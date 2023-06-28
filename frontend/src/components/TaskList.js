@@ -25,7 +25,6 @@ let TaskList = (props) =>{
     }, [props.apiData])
 
     useEffect(() => {
-        console.log(tasks)
         if(listType==='day'){
             setTasks(data.filter(dayTask => new Date(dayTask.due_date).toLocaleDateString() === props.activeDate.toLocaleDateString()))
         }
@@ -36,25 +35,12 @@ let TaskList = (props) =>{
 
     }, [props.activeDate])
     
-    
-
-
-    // const handleOnDragEnd = (result) =>{
-    //     const{source, destination, type} = result;
-    //     if (!result.destination) return
-    //     const todos = [...tasks]
-    //     const [reorderedItem] = todos.splice(result.source.index, 1)
-    //     todos.splice(result.destination.index, 0, reorderedItem);
-    //     console.log('source:'+JSON.stringify(type));
-        
-    // }
 
     const onAdd = (addedTask) =>{
-        console.log('added'+addedTask);
         setNewTask((prevValue)=>{
             return [...prevValue, addedTask]
         })
-        console.log('New task:' + newTasks)
+
     }
 
     const onDelete = (deletedTask)=>{
@@ -71,7 +57,7 @@ let TaskList = (props) =>{
     }
 
     let updateTask = async (object) =>{
-        console.log('update:'+ object)
+
         await fetch(`/api/tasks/${object.id}/update/`,{
         method:"PUT",
         headers:{
@@ -93,7 +79,6 @@ let TaskList = (props) =>{
     }
 
     const submitTask = async (task_object) =>{
-        console.log('task obj '+task_object);
         fetch('/api/tasks/create/',{
             method:'POST',
             headers:{
@@ -101,7 +86,6 @@ let TaskList = (props) =>{
             },
             body: JSON.stringify(task_object)
         })
-        console.log('update db');
     }
 
     const loopTasks = () =>{
@@ -129,9 +113,7 @@ let TaskList = (props) =>{
     }
 
     const changeView = ()=>{
-        
         setTasks(data.filter(dayTask => new Date(dayTask.due_date).toLocaleDateString() === props.activeDate.toLocaleDateString()))
-        
     }
 
 
@@ -167,7 +149,7 @@ let TaskList = (props) =>{
                     <div className="task-feed todo-content">
                         {tasks.map((task, index)=>{
                             if(task.completed===false){
-                                return(<Task id={task.id} key={task.id} title={task.title} body={task.body} due_date={task.due_date} completed={task.completed} clickFunction={enlargeTask} updateFunction={updateTask} deleteFunction={deleteTask}/>
+                                return(<Task id={task.id} key={task.id} title={task.title} body={task.body} due_date={task.due_date} completed={task.completed} clickFunction={enlargeTask} updateFunction={updateTask} deleteFunction={deleteTask} hoverFunction={props.hoverFunction}/>
                                 )
                             }
                         })}
@@ -177,10 +159,6 @@ let TaskList = (props) =>{
                         <div className="todo-box">
                         <h3 className="center-text todo-title">Unassigned Task</h3>
                             <div className="task-feed todo-content">
-
-                            
-                            
-                            
                             {newTasks.map((newTask, index) =>{
                                 return <Task id={index} key={index} title={newTask.title} body={newTask.body} due_date={newTask.due_date} is_unassigned={true} clickFunction={onDelete}/>
                             })}
