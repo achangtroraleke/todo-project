@@ -582,12 +582,12 @@ background-color: var(--secondary-color);
     background: white;
   }
   .banner{
-    height: 100%;
+    height: 80%;
   }
   .banner-content{
     flex-direction: column;
     width: 90%;
-    
+    height: 100dvh;
   }
   
   .banner-group{
