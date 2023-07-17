@@ -563,7 +563,7 @@ background-color: var(--secondary-color);
 }
 
 .banner-group{
-
+  overflow: hidden;
   width: 500px;
 }
 

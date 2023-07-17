@@ -1,10 +1,14 @@
 import React, { useContext, useState } from "react";
 import AuthContext from "../context/AuthContext";
+import {useNavigate} from 'react-router-dom'
 
  
-const LoginRegister = ()=>{
+const LoginRegister = (props)=>{
+    let navigate = useNavigate()
     let {loginUser, user} = useContext(AuthContext)
-    const [isRegistering, setRegister] = useState('')
+   
+
+
 
     const registerUser = async (e) =>{
         let response = fetch('/api/create-user/',{
@@ -13,32 +17,35 @@ const LoginRegister = ()=>{
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({'username':e.target.username.value, 'password':e.target.password.value})
+        }).then((response)=>{
+            if (response.status ===200){
+                alert("Success. Please Sign-in"); 
+                navigate('/welcome')
+            }
+            else {
+                alert('That username is taken.') 
+            }
         })
-        if((await response).status !==200){
-            alert('Server Error occured during Sign-up. Please try again.')
-        }else{
-            alert('Registration Successful, Please Sign-in.')
-        }
-      
+
     }
 
     return(
-        <div className="flex-column">
-            <div className="flex-column wrapper-box-shadow background rounded login center">
-            <h1 className="no-margin center">Login/Sign-Up</h1>
-            <form onSubmit={isRegistering?registerUser:loginUser} className="flex-column form-group">
+        
+            <div className="flex-column wrapper-box-shadow background  login center">
+            <h1 className="no-margin center">Sign-up</h1>
+            <form onSubmit={props.register?registerUser:loginUser} className="flex-column form-group">
                 <input required className='center-text rounded' type="text" name='username' placeholder="Username"/>
                 <input required className='center-text rounded' type="password" name='password' placeholder="Password"/>
-                <input className="button-style pressable" type="submit" value='Login'/>
-                <input onClick={()=>{setRegister(true)
-                }} className="button-style pressable" type="submit" value='Register'/>
-            
+                <input className="button-style pressable" type="submit" value={props.register?'Sign-up':'Login'}/>
+                {!props.register?<div onClick={()=>{navigate('/register')}} className="button-style pressable" >Register</div>:<div onClick={()=>{navigate('/')}} className="button-style pressable" >Back to login</div>}
+
             </form>
+            
             </div>
        
             
 
-            </div>
+          
        
     )
 }

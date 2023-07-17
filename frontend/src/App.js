@@ -10,6 +10,7 @@ import Home from './pages/HomePage';
 import PrivateRoute  from './utils/PrivateRoute';
 import { AuthProvider } from './context/AuthContext';
 import LandingPage from './pages/LandingPage';
+import RegisterPage from './pages/RegisterPage';
 
 
 
@@ -24,6 +25,7 @@ function App() {
           <Route path='/' element={<PrivateRoute/>}>
             <Route  path='/home' element={<Home/>}/>
           </Route>
+          <Route path='/register' element={<RegisterPage/>}/>
           
             
       </Routes>
