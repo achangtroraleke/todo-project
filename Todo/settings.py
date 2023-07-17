@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-p61(osj*&9j4k(q5wy@q0t=2jzlk9h*ilcct2j@txx@43w6&lv
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['atachart.pythonanywhere.com/']
+ALLOWED_HOSTS = ['atachart.pythonanywhere.com','127.0.0.1']
 
 
 # Application definition
