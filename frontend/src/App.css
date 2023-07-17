@@ -587,7 +587,7 @@ background-color: var(--secondary-color);
   .banner-content{
     flex-direction: column;
     width: 90%;
-    
+    height: none;
   }
   .banner-group{
     width: 100%;
