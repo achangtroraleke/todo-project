@@ -1,10 +1,10 @@
 
-import React, {useState, useEffect}from "react";
+import React, {useState, useEffect, useContext}from "react";
 import Button from "./Button";
-
-import { set } from "date-fns";
+import AuthContext from "../context/AuthContext";
 
 const TaskInput = (props)=> {
+    let {user} = useContext(AuthContext)
     let currentdate = new Date();
     var datetime = 
                  currentdate.getFullYear()+'-'
@@ -13,13 +13,15 @@ const TaskInput = (props)=> {
                 + currentdate.getHours() + ":"  
                 + currentdate.getMinutes() + ":" 
                 + currentdate.getSeconds();
+
+    
     
 
     const [newTask, setNewTask] = useState({
         title:"",
         body:"",
-        due_date:datetime
-   
+        due_date:datetime,
+       
     });
 
     
@@ -46,13 +48,17 @@ const TaskInput = (props)=> {
 
     const handleSubmit = () => {
         props.onSubmit(newTask);
+        console.log(user.user_id)
+        setNewTask((prevTask)=>{
+            return{
+                ...prevTask,
+                title:"",
+                body:"",
+                created: datetime,
+                updated: datetime,
+                due_date:prevTask.due_date
+            }
         
-        setNewTask({
-            title:"",
-            body:"",
-            created: datetime,
-            updated: datetime,
-            due_date:datetime
         });
        
     }
@@ -76,13 +82,13 @@ const TaskInput = (props)=> {
                     name="due_date"
                     min={datetime}
                     onChange={handleChange}
-                    
                     />
                 </div>
 
                 <div className="task-form-group">
                     <label className="">Task Title:</label>
-                    <input type="text" name="title" onChange={handleChange} placeholder="Task Header" value={newTask.title}/>
+                    <input type="text" name="title" onChange={handleChange} placeholder="Task Header" value={newTask.title} required/>
+                    
                 </div>
 
                 <div className="task-form-group">

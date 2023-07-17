@@ -7,7 +7,7 @@ const Button = (props) =>{
     }
 
     return(
-        <button className="button-style todo-box-button pressable" onClick={handleClick}><h3 className="no-margin button-style">{props.text}</h3></button>
+        <button className="button-style todo-box-button pressable" onClick={handleClick}><h3 className="no-margin">{props.text}</h3></button>
     )
 }
 

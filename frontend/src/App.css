@@ -53,7 +53,13 @@ body{
   background-size: cover;
 }
 
+section{
+  height: 100dvh;
+}
 
+.top-header{
+  padding-top: 5rem;
+}
 
 a,
 a::after,
@@ -74,6 +80,10 @@ main{
   height: 100%;
 }
 
+input:focus::placeholder {
+  color: transparent;
+}
+
 .flex{
   display: flex;
 }
@@ -83,6 +93,9 @@ main{
   flex-direction: column;
 }
 
+.center{
+  margin: auto;
+}
 
 .wrapper-box-shadow{
   box-shadow: gray  -1px 2.5px 3px 3px;
@@ -90,22 +103,54 @@ main{
 
 .navbar{
   background:var(---main-color);
-  position: static;
+  position: fixed;
   width: 100%;
   display: flex;
   height:4rem;
   align-items: center;
+  z-index: 9;
+}
+
+.navbar-nav{
+  width: 90%;
+  align-items: center;
+  height: 100%;
+}
+
+
+.navbar-nav ul{
+  margin-left: auto;
+  height: inherit;
+}
+
+
+
+.nav-group{
+  gap: 2em;
 }
 
 .nav-item{
   display: block;
   margin: auto;
   text-align: center;
-  font-size: 3rem;
   font-weight: 600;
   color: #000;
+  height: inherit;
+  border:  1px white;
+  align-items: baseline;
 }
 
+.vertical-center{
+  position: relative;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  top: 50%;
+}
+
+
+.logo{
+  font-size: 3em;
+}
 
 .task-section{
 margin: auto;
@@ -128,9 +173,16 @@ ul{
 }
 
 
-.todo-box{
+.background{
   background: var(---main-color);
-  border-radius: 25px;
+}
+
+.rounded{
+  border-radius: 15px;
+}
+
+.todo-box{
+
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -163,15 +215,18 @@ ul{
   display: flex;
   align-items: center;
   gap: .5rem;
-  justify-content: space-between;
+  justify-content: space-evenly;
 }
 
 .task-container{
-  display:block;
   padding:2.5px 25px;
   width: 50%;
   background-color: var(--background-color); 
   border-radius: 15px;
+  gap: 1em;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 83px;
 }
 
 
@@ -218,6 +273,7 @@ textarea {
 .task-input input{
   background-color: transparent;
   border: none;
+  font-size: 1em;
 }
 
 
@@ -235,9 +291,21 @@ textarea {
 
 
 .button-style{
-  border-radius: 10px;
-  font-size: 1em;
-  height: 5rem;
+  padding: 10px 15px;
+  font-size: 24px;
+  text-align: center;
+  color: var(--background-color);
+  background-color: var(--secondary-color);
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+}
+
+.button-style:active {
+  background-color: var(--background-color);
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+  color: var(---main-color);
 }
 
 .add-format{
@@ -260,6 +328,27 @@ textarea {
 .delete-img:hover{
   fill: #f82b01;
 }
+
+.login{
+  gap: 1rem;
+  align-items: center;
+  padding: 25px  0;
+  max-height: 600px;
+  width: 100%;
+  font-size: 1.25rem;
+}
+
+.form-group{
+  gap:1rem;
+  font-size: 1rem;
+  width: 75%;
+}
+.form-group input{
+  font-size: 1.25rem;
+  min-height: 15px;
+}
+
+
 .hidden{
   display: none;
 }
@@ -277,12 +366,10 @@ textarea {
   padding: 15px;
   animation: fadeIn .5s;
   animation-fill-mode: forwards;
-  max-width: 50%;
+  max-width: 500px;
   width: 50%;
   box-shadow: 1px 1px 1.5px 3px #000;
   border-radius: 25px;
-
-
 }
 
 .popup-background{
@@ -296,15 +383,10 @@ textarea {
 
 }
 
-
-
-
 .container-liquid{
  position: relative;
- width: 75%;
+ width: 70%;
  margin: 2.5rem auto;
-
- 
 }
 
 .loading-box{
@@ -351,13 +433,6 @@ textarea {
   width: 13.6%;
 }
 
-.day-label{
-  position: relative;
-  margin-top: auto;
-  top: 25%;
-  
-}
-
 .day-card{
   width:13.6%;
   display: inline-block;
@@ -369,6 +444,7 @@ textarea {
 
 .today{
   background:var(--secondary-color); 
+  color: white;
   
 }
 
@@ -392,6 +468,7 @@ textarea {
   display: flex;
   flex-direction: column;
 }
+
 
 .arrow-button svg{
   margin: auto;
@@ -423,12 +500,20 @@ textarea {
   
 }
 
+.title-box{
+  
+  margin: 1em auto;
+  border-radius: 25px;
+  width: 95%;
+}
+
 .todo-box-header{
   width: 80%;
 }
 
 .todo-title{
   font-size: 1.25em;
+  width: 100%;
 }
 
 .todo-box-button{
@@ -442,9 +527,13 @@ textarea {
   border: solid;
 }
 
+.summary .todo-box{
+  max-width: none;
+  width: 40%;
+}
+
 .no-margin{
   margin: 0;
-  height: fit-content;
 }
 
 
@@ -452,14 +541,66 @@ textarea {
   cursor: pointer;
 }
 .pressable:active{
-transform: translateY(2px);
+transform: translateY(1px);
 }
-@media (max-width:1024px)  {
+
+.nav-item.pressable:active{
+background-color: var(--secondary-color);
+
+}
+
+.banner{
+  height: 60%;
+  background-color: var(--background-color);
+}
+
+.banner-content{
+  gap: 4rem;
+  align-items: baseline;
+  justify-content: space-between;
+  width: 70%;
+  height: 70%;
+}
+
+.banner-group{
+
+  width: 500px;
+}
+
+.banner-group p{
+  font-size: 2rem;
+}
+.banner-group .logo{
+  color: var(---main-color);
+  
+
+}
+
+
+@media (max-width:1000px)  {
   body{
     background: white;
   }
+  .banner{
+    height: 80%;
+  }
+  .banner-content{
+    flex-direction: column;
+    width: 90%;
+    
+  }
+  .banner-group{
+    width: 100%;
+  }
 
-  .clock{
+  .navbar-nav{
+    width: 95%;
+  }
+
+  .nav-group{
+    gap:.5em;
+  }
+  .nav-item h3{
     display: none;
   }
 
@@ -470,10 +611,7 @@ transform: translateY(2px);
   .task-section{
     background-color: transparent;
     height: 100%;
-    margin-top: 2em;
-  }
-  .task-feed{
-    width: 100%;
+   
   }
   .task-item{
     justify-content: space-evenly;
@@ -484,15 +622,19 @@ transform: translateY(2px);
     max-height: 20em;
   }
 
-  .title-box{
-    background-color: var(---main-color);
-    position: relative;
-  }
   .container-liquid{
-    width: 95dvw;
+    width: 90dvw;
+    margin:.5em auto;
+  }
+  .container-liquid:first-child{
+    margin-top: .5rem;
   }
   .calender-container{
     font-size: 2.5dvw;
   }
+  .summary{
+    flex-direction: row;
+  }
+  
 
 }

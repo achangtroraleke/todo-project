@@ -1,13 +1,11 @@
-import React,{useState, useEffect} from "react";
+import React,{useState, useEffect, useContext} from "react";
 import Task from "../components/Task";
-import { DragDropContext, Droppable, Draggable} from "react-beautiful-dnd";
 import TaskInput from "./TaskInput";
 import Button from "./Button";
-import { format, set } from "date-fns";
 import TaskWindow from "./TaskWindow";
 import LoadingIcon from "./Loading";
-import { da } from "date-fns/locale";
 import Clock from "./Clock";
+import AuthContext from "../context/AuthContext";
 
 let TaskList = (props) =>{
     const data = props.apiData;
@@ -17,8 +15,7 @@ let TaskList = (props) =>{
     const [selectTask, setSelectedTask] = useState('');
     const [popUpState, setPopUpState] = useState(false);
     const [listType, setListType] = useState('month');
-    
-
+    let {authTokens} = useContext(AuthContext)
     
     useEffect(()=>{
         setTasks(data)
@@ -37,6 +34,7 @@ let TaskList = (props) =>{
     
 
     const onAdd = (addedTask) =>{
+        console.log(addedTask)
         setNewTask((prevValue)=>{
             return [...prevValue, addedTask]
         })
@@ -55,13 +53,14 @@ let TaskList = (props) =>{
         })
         
     }
-
+    
     let updateTask = async (object) =>{
 
         await fetch(`/api/tasks/${object.id}/update/`,{
         method:"PUT",
         headers:{
-            "Content-Type": 'application/json'
+            "Content-Type": 'application/json',
+            'Authorization':'Bearer '+ String(authTokens.access)
         },
         body:JSON.stringify(object)
     });
@@ -72,7 +71,8 @@ let TaskList = (props) =>{
         await fetch(`/api/tasks/${object.id}/delete/`,{
             method:"DELETE",
             headers:{
-                "Content-Type":'application/json'
+                "Content-Type":'application/json',
+                'Authorization':'Bearer '+ String(authTokens.access)                
         },
         })
         props.loadingFunction(true);
@@ -82,14 +82,15 @@ let TaskList = (props) =>{
         fetch('/api/tasks/create/',{
             method:'POST',
             headers:{
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization':'Bearer '+ String(authTokens.access)
             },
+        
             body: JSON.stringify(task_object)
         })
     }
 
     const loopTasks = () =>{
-    
         newTasks.map((newTask) =>{
             submitTask(newTask)
         });
@@ -101,9 +102,7 @@ let TaskList = (props) =>{
     const enlargeTask = (taskObject)=>{
         setSelectedTask(taskObject);
         setPopUpState(true);
-        setStyle('reveal');
-        
-        
+        setStyle('reveal');        
     }
 
     const closeWindow =()=>{
@@ -121,7 +120,7 @@ let TaskList = (props) =>{
 
 
     return(
-        <div className="container-liquid wrapper">
+        <div id='tasks' className={"container-liquid wrapper "+ (!props.isDesktop && !props.active? 'hidden':null)}>
             <div className={dynamicStyle}>
                 <TaskWindow selectedTask={selectTask} active={popUpState} clickFunction={closeWindow} submitFunction={updateTask}/>
             </div>
@@ -132,7 +131,7 @@ let TaskList = (props) =>{
                     </div>
                     
                     <div className="todo-list-section flex">
-                        <div className="todo-box">
+                        <div className="todo-box background rounded">
 
                     <div className="todo-box-header flex-column">
                       
@@ -156,19 +155,19 @@ let TaskList = (props) =>{
                     </div>
                         </div>
 
-                        <div className="todo-box">
-                        <h3 className="center-text todo-title">Unassigned Task</h3>
+                        <div className="todo-box background rounded">
+                            <h3 className="center-text todo-title">Unassigned Task</h3>
                             <div className="task-feed todo-content">
                             {newTasks.map((newTask, index) =>{
                                 return <Task id={index} key={index} title={newTask.title} body={newTask.body} due_date={newTask.due_date} is_unassigned={true} clickFunction={onDelete}/>
                             })}
                             </div>
                             
-                            <Button className='button-style' text='Submit New Task' clickFunction={loopTasks}/>
+                            <Button className='button-style' text='Commit' clickFunction={loopTasks}/>
                         </div>
 
-                        <div className="todo-box">
-                        <TaskInput onSubmit={onAdd}/>
+                        <div className="todo-box background rounded">
+                        <TaskInput onSubmit={onAdd} activeDate={props.activeDate} startingDate={props.selectedDate}/>
                         </div>
                     </div>
                     

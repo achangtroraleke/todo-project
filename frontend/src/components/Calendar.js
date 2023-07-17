@@ -7,7 +7,7 @@ let Calendar = (props) => {
     const selectedDate = props.selectedDate;
     const month = selectedDate.getMonth();
     const [daysInMonth, setDaysInMonth] = useState([]);
-    const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+    const weekday = ["Sun","Mon","Tues","Wed","Thurs","Fri","Sat"];
     const tasksForTheMonth  = props.apiData;
     const monthNames = ["January", "February", "March", "April", "May", "June",
                         "July", "August", "September", "October", "November", "December"
@@ -60,24 +60,27 @@ let Calendar = (props) => {
 
     const handleClick = (date)=>{
         props.changeDateFunction(date)
+        console.log(document.querySelector('#id.container-liquid'))
     }
+
+    
 
     return (
     
-    <div className="container-liquid">
-        <div className="calender-container wrapper-box-shadow ">
+    <div id="calender" className={"container-liquid calender-element calender " }>
+        <div className={"calender-container wrapper-box-shadow "}>
 
             <div className="calender-header flex">
 
-            <div className="arrow-button pressable" onClick={()=>{
+            <div className="arrow-button pressable " onClick={()=>{
                 clickFunction('subtract');
             }}>
-                <svg className="back-arrow " xmlns="http://www.w3.org/2000/svg" height="70" viewBox="0 96 960 960" width="48"><path d="m375 816-43-43 198-198-198-198 43-43 241 241-241 241Z"/></svg>
+                <svg className="back-arrow" xmlns="http://www.w3.org/2000/svg" height="70" viewBox="0 96 960 960" width="48"><path d="m375 816-43-43 198-198-198-198 43-43 241 241-241 241Z"/></svg>
             </div>
             
             <div className="header-title flex">
                 <input onChange={handleChange} type="month"></input>
-                <h2>{monthNames[month]} {selectedDate.getFullYear()} Tasks:{tasksForTheMonth.filter(x => x.completed === false).length}</h2>
+                <h2 className="no-margin">{monthNames[month]} {selectedDate.getFullYear()} Tasks:{tasksForTheMonth.filter(x => x.completed === false).length}</h2>
             </div>
 
                 <div className="arrow-button pressable" onClick={()=>{
@@ -87,12 +90,12 @@ let Calendar = (props) => {
                 
             </div>
 
-            <div className="calendar">
+            <div className={"calendar " + (!props.isDesktop && !props.active? 'hidden':null)}>
                 <div className="days-of-week flex">
                 {weekday.map((dayName, index)=>{
                 return(
                     <div key ={index} className="day-container">
-                <h3 className="day-label center-text">{dayName}</h3>
+                <h3 className="day-label center-text no-margin vertical-center">{dayName}</h3>
                 </div>)
             })}
                 </div>
