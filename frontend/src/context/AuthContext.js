@@ -11,6 +11,17 @@ export const AuthProvider = ({children})=>{
     let [authTokens, setAuthTokens] = useState(()=>localStorage.getItem('authTokens') ? JSON.parse(localStorage.getItem('authTokens')):null)
     let [user, setUser] = useState(()=>localStorage.getItem('authTokens') ? jwt_decode(localStorage.getItem('authTokens')):null)
     let [loading, setLoading] = useState(true)
+
+    const formatDate = (currentdate) =>{
+        var datetime = 
+        currentdate.getFullYear()+'-'
+       + (currentdate.getMonth()+1)  + "-" 
+       +  currentdate.getDate() +' '
+       + currentdate.getHours() + ":"  
+       + currentdate.getMinutes() + ":" 
+       + currentdate.getSeconds()
+       return datetime
+    }
     
     const navigate = useNavigate();
 
@@ -63,12 +74,14 @@ export const AuthProvider = ({children})=>{
             logoutUser()
         }
     }
+    
 
     let contextData = {
         user:user,
         authTokens:authTokens,
         loginUser:loginUser,
         logoutUser:logoutUser,
+        formatDate:formatDate
     }
     
     useEffect(() =>{

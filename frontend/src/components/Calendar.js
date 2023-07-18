@@ -1,5 +1,7 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useContext} from "react";
 import CalendarCard from "./CalendarCard";
+import AuthContext from "../context/AuthContext";
+
 
 
 let Calendar = (props) => {
@@ -12,7 +14,7 @@ let Calendar = (props) => {
     const monthNames = ["January", "February", "March", "April", "May", "June",
                         "July", "August", "September", "October", "November", "December"
                         ];
-  
+    let {formatDate} = useContext(AuthContext)
     
 
     useEffect(()=>{   
@@ -79,7 +81,7 @@ let Calendar = (props) => {
             </div>
             
             <div className="header-title flex">
-                <input onChange={handleChange} type="month"></input>
+                <input onChange={handleChange} type="month" value={new Date(selectedDate).toISOString().slice(0,7)}></input>
                 <h2 className="no-margin">{monthNames[month]} {selectedDate.getFullYear()} Tasks:{tasksForTheMonth.filter(x => x.completed === false).length}</h2>
             </div>
 

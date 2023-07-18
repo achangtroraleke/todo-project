@@ -4,23 +4,13 @@ import Button from "./Button";
 import AuthContext from "../context/AuthContext";
 
 const TaskInput = (props)=> {
-    let {user} = useContext(AuthContext)
+    let {user, formatDate} = useContext(AuthContext)
     let currentdate = new Date();
-    var datetime = 
-                 currentdate.getFullYear()+'-'
-                + (currentdate.getMonth()+1)  + "-" 
-                +  currentdate.getDate() +' '
-                + currentdate.getHours() + ":"  
-                + currentdate.getMinutes() + ":" 
-                + currentdate.getSeconds();
-
-    
-    
 
     const [newTask, setNewTask] = useState({
         title:"",
         body:"",
-        due_date:datetime,
+        due_date:formatDate(currentdate),
        
     });
 
@@ -54,9 +44,9 @@ const TaskInput = (props)=> {
                 ...prevTask,
                 title:"",
                 body:"",
-                created: datetime,
-                updated: datetime,
-                due_date:prevTask.due_date
+                created: formatDate(currentdate),
+                updated: formatDate(currentdate),
+                due_date:prevTask.formatDate(currentdate)
             }
         
         });
@@ -80,7 +70,7 @@ const TaskInput = (props)=> {
                     id='due_date'
                     type="datetime-local"
                     name="due_date"
-                    min={datetime}
+                    min={formatDate(currentdate)}
                     onChange={handleChange}
                     value={newTask.due_date}
                     />
