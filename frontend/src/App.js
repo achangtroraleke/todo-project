@@ -22,10 +22,11 @@ function App() {
       <AuthProvider>
       <Routes>
           <Route path='/' element={<LandingPage/>}/>
+          <Route path='/register' element={<RegisterPage/>}/>
           <Route path='/' element={<PrivateRoute/>}>
             <Route  path='/home' element={<Home/>}/>
           </Route>
-          <Route path='/register' element={<RegisterPage/>}/>
+          
           
             
       </Routes>

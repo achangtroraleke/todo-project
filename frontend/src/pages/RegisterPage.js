@@ -5,7 +5,7 @@ const RegisterPage = ()=>{
 
 
     return(
-        <section className="container flex-column top-header background">
+        <section className="container flex-column background">
         <div className="banner">
         <div className="banner-content flex center vertical-center">
             <div className="banner-group"> 
