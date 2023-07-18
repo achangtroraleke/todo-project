@@ -5,7 +5,7 @@ import {
 }
 from 'react-router-dom'
 import './App.css';
-import React,{Fragment} from 'react';
+import React from 'react';
 import Home from './pages/HomePage';
 import PrivateRoute  from './utils/PrivateRoute';
 import { AuthProvider } from './context/AuthContext';
@@ -21,11 +21,12 @@ function App() {
     <Router >
       <AuthProvider>
       <Routes>
-          <Route path='/' element={<LandingPage/>}/>
-          <Route path='/register' element={<RegisterPage/>}/>
+          <Route path='/main' element={<LandingPage/>}/>
+          
           <Route path='/' element={<PrivateRoute/>}>
-            <Route  path='/home' element={<Home/>}/>
+            <Route  path='/' element={<Home/>}/>
           </Route>
+          <Route path='/register' element={<RegisterPage/>}/>
           
           
             
