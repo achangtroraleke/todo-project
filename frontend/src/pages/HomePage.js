@@ -12,9 +12,7 @@ let Home = () => {
     const isDesktop = useMediaQuery({
         query:'(min-width: 1000px'
     })
-
-    console.log(isDesktop)
-    console.log(activePage)
+    
     return(
         <section className="">
         <Navbar setPageFunction={setPageFunction} isDesktop={isDesktop}/>

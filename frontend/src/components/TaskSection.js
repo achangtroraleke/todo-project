@@ -12,7 +12,7 @@ const TaskSection = (props) =>{
     const [fetchedData, setFetchedData] = useState([])
     const [activeDate, setActiveDate] = useState(selectedDate)
     let {user, authTokens} = useContext(AuthContext)
-    console.log(authTokens)
+    
 
     useEffect(()=>{
         getTasksByMonth();
@@ -34,6 +34,7 @@ const TaskSection = (props) =>{
     // }
 
     const getTasksByMonth = async () =>{
+        console.log(authTokens.access)
          let response = await fetch(`/api/tasks/year/${selectedDate.getFullYear()}/`,{
             method:'GET',
             headers:{
