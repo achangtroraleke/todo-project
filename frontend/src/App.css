@@ -336,6 +336,7 @@ textarea {
   max-height: 600px;
   width: 100%;
   font-size: 1.25rem;
+  
 }
 
 .form-group{
@@ -550,8 +551,9 @@ background-color: var(--secondary-color);
 }
 
 .banner{
-  height: 60%;
+
   background-color: var(--background-color);
+  min-height: 600px;
 }
 
 .banner-content{
@@ -559,7 +561,7 @@ background-color: var(--secondary-color);
   align-items: baseline;
   justify-content: space-between;
   width: 70%;
-  height: 70%;
+  
 }
 
 .banner-group{
@@ -587,7 +589,7 @@ background-color: var(--secondary-color);
   .banner-content{
     flex-direction: column;
     width: 90%;
-    height: 100dvh;
+    gap: 1rem;
   }
   
   .banner-group{
