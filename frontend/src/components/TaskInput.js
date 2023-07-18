@@ -82,7 +82,7 @@ const TaskInput = (props)=> {
                     name="due_date"
                     min={datetime}
                     onChange={handleChange}
-                    value={currentdate.toISOString()}
+                    value={newTask.due_date}
                     />
                 </div>
 
