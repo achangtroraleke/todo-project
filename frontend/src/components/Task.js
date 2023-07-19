@@ -8,14 +8,8 @@ import AuthContext from "../context/AuthContext";
 
 
 let Task = (props) => {
-    let {formatDate} = useContext(AuthContext)
+   
     let [task, setTask] = useState(props);
-
-    let formattedDate = ()=>{
-        let datetimeData =new Date(props.due_date);
-        let formattedData = format(datetimeData, 'yyyy/MM/dd h:mm:ss aa');
-        return formattedData
-    }
 
     const handleClick = ()=>{
         props.clickFunction(props);
