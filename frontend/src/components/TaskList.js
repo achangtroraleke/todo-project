@@ -156,6 +156,10 @@ let TaskList = (props) =>{
                         </div>
 
                         <div className="todo-box background rounded">
+                        <TaskInput onSubmit={onAdd} activeDate={props.activeDate} startingDate={props.selectedDate}/>
+                        </div>
+
+                        <div className="todo-box background rounded">
                             <h3 className="center-text todo-title">Unassigned Task</h3>
                             <div className="task-feed todo-content">
                             {newTasks.map((newTask, index) =>{
@@ -166,9 +170,7 @@ let TaskList = (props) =>{
                             <Button className='button-style' text='Commit' clickFunction={loopTasks}/>
                         </div>
 
-                        <div className="todo-box background rounded">
-                        <TaskInput onSubmit={onAdd} activeDate={props.activeDate} startingDate={props.selectedDate}/>
-                        </div>
+                        
                     </div>
                     
                 </div>
