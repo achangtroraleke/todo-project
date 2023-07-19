@@ -7,7 +7,7 @@ const TaskInput = (props)=> {
     let {user, formatDate} = useContext(AuthContext)
     let currentdate = new Date();    
     
-
+    console.log(currentdate)
     const [newTask, setNewTask] = useState({
         title:"",
         body:"",
@@ -21,7 +21,7 @@ const TaskInput = (props)=> {
         }
     },[props.edit])
     
-
+    
 
     const handleChange = (e) => {
        

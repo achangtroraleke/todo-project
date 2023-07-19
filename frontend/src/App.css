@@ -217,18 +217,27 @@ ul{
   align-items: center;
   gap: .5rem;
   justify-content: space-evenly;
+  width: inherit;
 }
 
 .task-container{
   padding:2.5px 25px;
-  width: 50%;
   background-color: var(--background-color); 
   border-radius: 15px;
   gap: 1em;
   justify-content: space-between;
   align-items: center;
   min-height: 83px;
+  width: inherit;
+  overflow: scroll;
 }
+.task-container p {
+  width: 100%;
+}
+.task-container::-webkit-scrollbar{
+  display: none;
+}
+
 
 
 .task-title{

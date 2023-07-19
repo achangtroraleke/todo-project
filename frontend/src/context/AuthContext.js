@@ -14,9 +14,8 @@ export const AuthProvider = ({children})=>{
 
     const formatDate = (data) =>{
         let currentdate =new Date(data)
-        let formatTime = currentdate.toString().split(' ')[4]
-        var formattedDate = currentdate.toISOString().split('T')[0]; 
-        let output =  formattedDate + 'T' +formatTime
+        let output = new Date(currentdate.toLocaleString().split('GMT')[0]+' UTC').toISOString().split('.')[0]
+       
        return (output)
     }
     
