@@ -36,7 +36,7 @@ const CalendarCard = (props)=>{
     <div id="card" onClick={()=>{props.clickFunction(formattedDate);
     }} className= "day-card center-text pressable" style={props.activeDate.toLocaleDateString() === formattedDate? {outline:'solid'}:null}>
         <div className="day-card-content">
-        <h2 className="date">{props.month +1}/{props.day}</h2>
+        <h3 className="date">{props.month +1}/{props.day}</h3>
         <div className="task-calendar-box">
         <p>Tasks </p>
         <h3>{props.tasksInDay.filter(task=> task.completed===false).length}</h3>
