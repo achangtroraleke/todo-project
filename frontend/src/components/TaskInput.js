@@ -5,21 +5,21 @@ import AuthContext from "../context/AuthContext";
 
 const TaskInput = (props)=> {
     let {user, formatDate} = useContext(AuthContext)
-    let currentdate = new Date();
+    let currentdate = new Date();    
+    
 
     const [newTask, setNewTask] = useState({
         title:"",
         body:"",
-        due_date:formatDate(currentdate),
-       
+        due_date:currentdate,
     });
-
     
-        useEffect(()=>{
-            if (props.edit){
-                editCalled();
-            }
-        },[props.edit])
+    
+    useEffect(()=>{
+        if (props.edit){
+            editCalled();
+        }
+    },[props.edit])
     
 
 
@@ -27,6 +27,7 @@ const TaskInput = (props)=> {
        
         const {name, value} = e.target;
         setNewTask((prevTask) =>{
+            console.log('change'+JSON.stringify(prevTask))
             return {
                 ...prevTask,
                 [name]:value
@@ -44,9 +45,9 @@ const TaskInput = (props)=> {
                 ...prevTask,
                 title:"",
                 body:"",
-                created: formatDate(currentdate),
-                updated: formatDate(currentdate),
-                due_date:prevTask.formatDate(currentdate)
+                created: currentdate,
+                updated: currentdate,
+                due_date:prevTask.due_date
             }
         
         });
@@ -70,9 +71,9 @@ const TaskInput = (props)=> {
                     id='due_date'
                     type="datetime-local"
                     name="due_date"
-                    min={formatDate(currentdate)}
+                    min={currentdate}
                     onChange={handleChange}
-                    value={newTask.due_date}
+                    value={formatDate(newTask.due_date)}
                     />
                 </div>
 

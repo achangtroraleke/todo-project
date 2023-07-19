@@ -11,7 +11,7 @@ const TaskSection = (props) =>{
     const [selectedDate, setDate] = useState(new Date());
     const [fetchedData, setFetchedData] = useState([])
     const [activeDate, setActiveDate] = useState(selectedDate)
-    let {user, authTokens} = useContext(AuthContext)
+    let {user, authTokens, logoutUser} = useContext(AuthContext)
     
 
     useEffect(()=>{
@@ -25,16 +25,7 @@ const TaskSection = (props) =>{
         setLoading(value);
     }
 
-    // const getTasksByMonth = async () =>{
-    //     await fetch(`/api/tasks/year/${selectedDate.getFullYear()}/`)
-    //     .then((resp)=> resp.json())
-    //     .then((apiData)=>{
-    //         setFetchedData(apiData);
-    //     });
-    // }
-
     const getTasksByMonth = async () =>{
-        console.log(authTokens.access)
          let response = await fetch(`/api/tasks/year/${selectedDate.getFullYear()}/`,{
             method:'GET',
             headers:{
@@ -42,9 +33,12 @@ const TaskSection = (props) =>{
                 'Authorization':'Bearer '+ String(authTokens.access)
             }
          })
-
          let data = await response.json()
-         setFetchedData(data)
+         if (response.status==200){
+            setFetchedData(data)
+        }else{
+            logoutUser()
+        }
     }
     
 

@@ -80,9 +80,9 @@ let Calendar = (props) => {
                 <svg className="back-arrow" xmlns="http://www.w3.org/2000/svg" height="70" viewBox="0 96 960 960" width="48"><path d="m375 816-43-43 198-198-198-198 43-43 241 241-241 241Z"/></svg>
             </div>
             
-            <div className="header-title flex">
+            <div className="header-title flex-column ">
                 <input onChange={handleChange} type="month" value={new Date(selectedDate).toISOString().slice(0,7)}></input>
-                <h2 className="no-margin">{monthNames[month]} {selectedDate.getFullYear()} Tasks:{tasksForTheMonth.filter(x => x.completed === false).length}</h2>
+                <h2 className="no-margin">Tasks:{tasksForTheMonth.filter(x => x.completed === false).length}</h2>
             </div>
 
                 <div className="arrow-button pressable" onClick={()=>{

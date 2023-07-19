@@ -12,15 +12,12 @@ export const AuthProvider = ({children})=>{
     let [user, setUser] = useState(()=>localStorage.getItem('authTokens') ? jwt_decode(localStorage.getItem('authTokens')):null)
     let [loading, setLoading] = useState(true)
 
-    const formatDate = (currentdate) =>{
-        var datetime = 
-        currentdate.getFullYear()+'-'
-       + (currentdate.getMonth()+1)  + "-" 
-       +  currentdate.getDate() +' '
-       + currentdate.getHours() + ":"  
-       + currentdate.getMinutes() + ":" 
-       + currentdate.getSeconds()
-       return datetime
+    const formatDate = (data) =>{
+        let currentdate =new Date(data)
+        let formatTime = currentdate.toString().split(' ')[4]
+        var formattedDate = currentdate.toISOString().split('T')[0]; 
+        let output =  formattedDate + 'T' +formatTime
+       return (output)
     }
     
     const navigate = useNavigate();
@@ -85,13 +82,13 @@ export const AuthProvider = ({children})=>{
     }
     
     useEffect(() =>{
-        let fourMinutes = 1000 * 600 *2
-        console.log(fourMinutes)
+        let fifteenMinutes = 1000 * 600 *15
+        console.log('Refresh Called')
         let interval = setInterval(()=>{
             if(authTokens){
                 updateToken()
             }
-        }, 600000)
+        }, fifteenMinutes)
         return()=> clearInterval(interval)
     },[authTokens, loading])
 
