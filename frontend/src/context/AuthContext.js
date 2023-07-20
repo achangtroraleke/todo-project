@@ -15,9 +15,12 @@ export const AuthProvider = ({children})=>{
     const formatDate = (data) =>{
         let currentdate =new Date(data)
         let output = new Date(currentdate.toLocaleString().split('GMT')[0]+' UTC').toISOString().split('.')[0]
-       
-       return (output)
+        let formatResult = output.toLocaleString().replace('T',' ').replace('-','/')
+        // console.log('formatted with date: ' + new Date(formatResult).toLocaleString())
+        let test = output.replace('Z','')
+        return (output)
     }
+
     
     const navigate = useNavigate();
 

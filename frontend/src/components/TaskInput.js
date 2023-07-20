@@ -6,14 +6,17 @@ import AuthContext from "../context/AuthContext";
 const TaskInput = (props)=> {
     let {user, formatDate} = useContext(AuthContext)
     let currentdate = new Date();    
-    
-    console.log(currentdate)
     const [newTask, setNewTask] = useState({
         title:"",
         body:"",
-        due_date:currentdate,
+        due_date:formatDate(currentdate),
     });
     
+    const convertUTCtoEST = (utc_date) =>{
+        let newDateObject = new Date(utc_date.replace('Z',''));
+        let result = formatDate(newDateObject)
+        return result
+    }
     
     useEffect(()=>{
         if (props.edit){
@@ -24,22 +27,22 @@ const TaskInput = (props)=> {
     
 
     const handleChange = (e) => {
-       
+        
         const {name, value} = e.target;
         setNewTask((prevTask) =>{
-            console.log('change'+JSON.stringify(prevTask))
             return {
                 ...prevTask,
                 [name]:value
             };
         });
         e.preventDefault();
-      
+        console.log(newTask)
     } 
 
     const handleSubmit = () => {
+
         props.onSubmit(newTask);
-        console.log(user.user_id)
+        
         setNewTask((prevTask)=>{
             return{
                 ...prevTask,
@@ -56,6 +59,7 @@ const TaskInput = (props)=> {
 
     const editCalled=()=>{
             setNewTask(props.editTask);
+            console.log(newTask)
     }
 
 
@@ -73,7 +77,7 @@ const TaskInput = (props)=> {
                     name="due_date"
                     min={currentdate}
                     onChange={handleChange}
-                    value={formatDate(newTask.due_date)}
+                    value={convertUTCtoEST(newTask.due_date)}
                     />
                 </div>
 
