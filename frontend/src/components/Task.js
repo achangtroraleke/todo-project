@@ -39,7 +39,7 @@ let Task = (props) => {
                 <div className="task-container">
                     <p className="task-title">{props.title}</p>
                     <p className="task-body">{props.body}</p>
-                    <small >Due Date: {props.due_date}</small>
+                    <small >Due Date: {new Date(props.due_date.replace('Z','')).toLocaleString()}</small>
                 </div>
             </div>
         )
